@@ -1,0 +1,199 @@
+1️⃣ var (Java 10)
+What it is
+var enables local variable type inference.
+
+The compiler infers the type from the initializer.
+
+Rules (very important)
+✅ Only for local variables
+
+❌ Cannot be used for:
+
+fields
+
+method parameters
+
+return types
+
+❌ Must be initialized immediately
+
+Example
+var message = "Hello, Java 10!";   // inferred as String
+var count = 10;                   // inferred as int
+❌ Invalid:
+
+var x;            // no initializer
+var y = null;     // cannot infer type
+Key point
+var is not dynamic typing — Java is still statically typed.
+
+2️⃣ yield (Java 14)
+What it is
+yield is used inside a switch expression to return a value.
+
+It “yields” a value from a switch block.
+
+Why it was needed
+Old switch:
+
+worked as a statement
+
+required break
+
+error-prone
+
+New switch:
+
+works as an expression
+
+returns a value
+
+Example
+int result = switch (day) {
+    case MONDAY, TUESDAY -> 1;
+    case FRIDAY -> {
+        yield 5;
+    }
+    default -> 0;
+};
+Key rule
+yield is used only inside switch expressions
+
+It is not a loop keyword (unlike in some other languages)
+
+3️⃣ record (Java 16)
+What it is
+A record is a special class for immutable data.
+
+It automatically generates boilerplate code.
+
+What Java generates for you
+constructor
+
+getters
+
+equals()
+
+hashCode()
+
+toString()
+
+Example
+public record Person(String name, int age) {}
+Equivalent to writing ~50 lines manually.
+
+Usage
+Person p = new Person("Vishnu", 22);
+System.out.println(p.name()); // getter
+Rules
+Records are final
+
+Fields are private final
+
+Best for DTOs / data holders
+
+4️⃣ sealed, permits (Java 17)
+What they are
+Used to restrict inheritance.
+
+You control which classes can extend a class.
+
+Example
+public sealed class Shape
+        permits Circle, Rectangle {
+}
+final class Circle extends Shape {}
+final class Rectangle extends Shape {}
+Why this exists
+Prevent uncontrolled inheritance
+
+Useful for domain models
+
+Helps the compiler with exhaustiveness checks (especially with switch)
+
+Rules
+Permitted subclasses must be:
+
+final
+
+sealed
+
+or non-sealed
+
+5️⃣ Java Module System keywords (Java 9)
+These keywords belong to JPMS (Java Platform Module System).
+
+module
+Defines a module
+
+module com.example.app {
+    requires java.sql;
+}
+requires
+Declares dependency on another module
+
+requires java.logging;
+requires transitive
+Dependency is passed to dependent modules
+
+requires transitive java.sql;
+exports
+Makes a package accessible to other modules
+
+exports com.example.util;
+exports … to
+Exports only to specific modules
+
+exports com.example.internal to com.friend.module;
+open
+Opens entire module for reflection
+
+open module my.module {
+}
+opens
+Opens a package for reflection
+
+opens com.example.model;
+uses
+Declares usage of a service
+
+uses com.example.Service;
+provides … with
+Provides implementation of a service
+
+provides com.example.Service
+    with com.example.ServiceImpl;
+Why modules matter
+Strong encapsulation
+
+Better dependency management
+
+Faster startup
+
+Smaller runtime images
+
+6️⃣ _ (underscore)
+What happened
+Earlier Java versions allowed _ as an identifier
+
+From Java 9 → reserved
+
+Now cannot be used as a variable name
+
+❌ Invalid:
+
+int _ = 10;
+Reason
+Reserved for potential future language features.
+
+📌 Summary Table (quick revision)
+Keyword	Java Version	Purpose
+var	10	Local type inference
+yield	14	Return value from switch expression
+record	16	Immutable data class
+sealed	17	Restrict inheritance
+permits	17	Allowed subclasses
+module	9	Define module
+requires	9	Module dependency
+exports	9	Expose package
+_	9+	Reserved identifier

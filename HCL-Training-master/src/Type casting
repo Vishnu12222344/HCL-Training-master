@@ -1,0 +1,47 @@
+Type Conversion in Java
+Type conversion means converting one data type into another.
+
+1️⃣ Implicit Type Conversion (Widening)
+Done automatically by Java
+
+Converts smaller → larger data type
+
+No data loss
+
+Safe
+
+Example:
+
+int a = 10;
+double b = a;   // int → double
+Order:
+
+byte → short → int → long → float → double
+char → int → long → float → double
+2️⃣ Explicit Type Conversion (Narrowing / Type Casting)
+Done manually by programmer
+
+Converts larger → smaller data type
+
+Data loss possible
+
+Risky
+
+Example:
+
+double x = 10.7;
+int y = (int) x;   // double → int (y = 10)
+3️⃣ Type Conversion with char
+char stores Unicode value
+
+char c = 'A';
+int i = c;    // 65
+4️⃣ Type Conversion in Expressions
+Smaller types are promoted to int
+
+byte a = 10, b = 20;
+int c = a + b;   // result is int
+Quick comparison
+Type	Automatic	Manual	Data Loss
+Widening	✅	     ❌	       ❌
+Narrowing	❌	     ✅	       ✅
