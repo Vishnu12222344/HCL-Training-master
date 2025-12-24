@@ -11,6 +11,10 @@ class Calc{
 
 }
 class AdvCalc extends Calc{
+
+    public int add(int a,int b){     // Method overriding is a thing in which methods have same name and same parameters but different behavior.
+        return a+b+1;
+    }
     public int mul(int a,int b){
         return a*b;
     }
