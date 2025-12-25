@@ -28,7 +28,9 @@ public class Lambda {
 
         // using lamda with return type.
 
-        A a= (i, j) -> i + j;
+        // A a= (i, j) -> i + j; or
+        A a= Integer::sum;
+
         int res= a.show(5,6);
         System.out.println(res);
 
